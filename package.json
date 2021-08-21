@@ -19,9 +19,11 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "lint": "tsdx lint src",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "test": "node dist/index.js"
   },
   "dependencies": {
+    "isomorphic-unfetch": "^3.1.0",
     "node-fetch": "^2.6.1",
     "swr": "^0.5.6"
   },

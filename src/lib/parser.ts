@@ -4,36 +4,13 @@ type SpotifyArtist = {
   name: string;
 };
 
-// type Album = {
-//   images: SpotifyAlbumImage[];
-//   name: string;
-//   release_date: string;
-// };
-
 type ExternalUrl = {
   spotify: string;
 };
 
-// const getAlbum = (album: Album): SpotifyAlbum => {
-//   const images: SpotifyAlbumImage[] = [];
-//   album.images.forEach((album) => {
-//     images.push({
-//       height: album.height,
-//       width: album.height,
-//       url: album.url
-//     })
-//   });
-
-//   return {
-//     images: images,
-//     name: album.name,
-//     releaseDate: album.release_date
-//   }
-// }
-
 const getArtistNames = (artists: SpotifyArtist[]): string[] => {
   const ret: string[] = [];
-  artists.forEach(artist => ret.push(artist.name));
+  artists.forEach((artist) => ret.push(artist.name));
   return ret;
 };
 

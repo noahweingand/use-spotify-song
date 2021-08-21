@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from 'isomorphic-unfetch';
 import { AccessToken, SpotifyTrack, Error } from '../types';
 import { mapRecentSpotifySong, mapCurrentSpotifySong } from './parser';
 
@@ -39,7 +39,7 @@ export async function getAccessToken(
 
 export async function getRecentlyPlayedSpotifySong(
   accessToken: string,
-): Promise<SpotifyTrack | Error> {
+): Promise<any> {
   try {
     const res = await fetch(
       'https://api.spotify.com/v1/me/player/recently-played?limit=1',
@@ -70,9 +70,7 @@ export async function getRecentlyPlayedSpotifySong(
   }
 }
 
-export async function getCurrentSpotifySong(
-  accessToken: string,
-): Promise<SpotifyTrack | Error> {
+export async function getCurrentSpotifySong(accessToken: string): Promise<any> {
   try {
     const res = await fetch(
       'https://api.spotify.com/v1/me/player/currently-playing?market=US',
