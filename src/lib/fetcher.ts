@@ -1,12 +1,11 @@
 import fetch from 'node-fetch';
-import { AccessToken, SpotifyTrack, Error } from '../types';
-import { mapRecentSpotifySong, mapCurrentSpotifySong } from './parser';
+import { ResponseEnum, TokenResponse, SpotifyTrackResponse } from '../types';
 
 export async function getAccessToken(
   clientId: string,
   clientSecret: string,
   refreshToken: string,
-): Promise<AccessToken> {
+): Promise<TokenResponse> {
   try {
     const authReq = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -22,24 +21,33 @@ export async function getAccessToken(
       }),
     });
 
-    const { access_token }: { access_token: string } = await authReq.json();
+    const response = await authReq.json();
 
-    return {
-      accessToken: access_token,
-      status: 'success',
-    };
+    return response.access_token
+      ? {
+          status: ResponseEnum.Success,
+          message:
+            'Access token succesfully obtained from Spotify authorization',
+          accessToken: response.access_token,
+        }
+      : {
+          status: ResponseEnum.Failed,
+          message: 'Failed to get access token from Spotify authorization',
+          accessToken: '',
+        };
   } catch (e) {
     console.log(e);
     return {
-      status: 'failed',
+      status: ResponseEnum.Failed,
       message: 'Failed to get access token from Spotify authorization',
+      accessToken: '',
     };
   }
 }
 
 export async function getRecentlyPlayedSpotifySong(
   accessToken: string,
-): Promise<SpotifyTrack | Error> {
+): Promise<SpotifyTrackResponse> {
   try {
     const res = await fetch(
       'https://api.spotify.com/v1/me/player/recently-played?limit=1',
@@ -54,17 +62,21 @@ export async function getRecentlyPlayedSpotifySong(
     const data = await res.json();
     if (data.items) {
       const { items }: { items: any } = data;
-      return mapRecentSpotifySong(items);
+      return {
+        status: ResponseEnum.Success,
+        message: 'Recent track received from Spotify API',
+        track: items,
+      };
     } else {
       return {
-        status: 'failed',
+        status: ResponseEnum.Failed,
         message: 'Something went wrong with getting recently played song...',
       };
     }
   } catch (e) {
     console.log(e);
     return {
-      status: 'failed',
+      status: ResponseEnum.Failed,
       message: 'Something went wrong with getting recently played song...',
     };
   }
@@ -72,7 +84,7 @@ export async function getRecentlyPlayedSpotifySong(
 
 export async function getCurrentSpotifySong(
   accessToken: string,
-): Promise<SpotifyTrack | Error> {
+): Promise<SpotifyTrackResponse> {
   try {
     const res = await fetch(
       'https://api.spotify.com/v1/me/player/currently-playing?market=US',
@@ -87,17 +99,21 @@ export async function getCurrentSpotifySong(
     const data = await res.json();
     if (data.item) {
       const { item }: { item: any } = data;
-      return mapCurrentSpotifySong(item);
+      return {
+        status: ResponseEnum.Success,
+        message: 'Current track received from Spotify API',
+        track: item,
+      };
     } else {
       return {
-        status: 'failed',
+        status: ResponseEnum.Failed,
         message: 'Something went wrong with getting current song...',
       };
     }
   } catch (e) {
     console.log(e);
     return {
-      status: 'failed',
+      status: ResponseEnum.Failed,
       message: 'Something went wrong with getting current song...',
     };
   }

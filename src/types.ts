@@ -1,13 +1,19 @@
-export type AccessToken = {
-  accessToken?: string;
-  status: 'success' | 'failed';
-  message?: string;
-};
+export enum ResponseEnum {
+  Success = 'success',
+  Failed = 'failed',
+}
 
-export type Error = {
-  status: 'failed';
+export type TokenResponse = {
+  accessToken: string;
+  status: string;
   message: string;
 };
+
+export interface SpotifyTrackResponse {
+  status: string;
+  message: string;
+  track?: SpotifyTrack;
+}
 
 export type SpotifyAlbumImage = {
   height: number;
