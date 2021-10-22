@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base",
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["prettier", "jest"],
+  "rules": {
+    "pretter/prettier": 0,
+    "import/prefer-default-export": [0],
+    "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
+    "max-len": [0],
+    "linebreak-style": [0]
+  }
+}
