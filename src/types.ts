@@ -9,12 +9,6 @@ export type TokenResponse = {
   message: string;
 };
 
-export interface SpotifyTrackResponse {
-  status: string;
-  message: string;
-  track?: SpotifyTrack;
-}
-
 export type SpotifyAlbumImage = {
   height: number;
   width: number;
@@ -36,4 +30,10 @@ export interface SpotifyTrack {
   previewUrl: string; // map
   isPlaying?: boolean;
   playedAt?: string;
+}
+
+export interface SpotifyTrackResponse {
+  status: string;
+  message: string;
+  track?: SpotifyTrack;
 }

@@ -33,7 +33,7 @@ type ExternalUrl = {
 
 const getArtistNames = (artists: SpotifyArtist[]): string[] => {
   const ret: string[] = [];
-  artists.forEach(artist => ret.push(artist.name));
+  artists.forEach((artist) => ret.push(artist.name));
   return ret;
 };
 
@@ -58,8 +58,8 @@ export const mapRecentSpotifySong = (items: any): SpotifyTrack => {
   const song = {
     title: name,
     artists: getArtistNames(artists),
-    album: album,
-    explicit: explicit,
+    album,
+    explicit,
     externalUrl: external_urls?.spotify,
     previewUrl: preview_url,
     playedAt: played_at,
@@ -89,8 +89,8 @@ export const mapCurrentSpotifySong = (items: any): SpotifyTrack => {
   const song = {
     title: name,
     artists: getArtistNames(artists),
-    album: album,
-    explicit: explicit,
+    album,
+    explicit,
     externalUrl: external_urls?.spotify,
     previewUrl: preview_url,
     isPlaying: is_playing,

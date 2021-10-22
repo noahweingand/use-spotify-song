@@ -1,22 +1,14 @@
 import { ResponseEnum, SpotifyTrack } from './types';
-import {
-  getAccessToken,
-  getCurrentSpotifySong,
-  getRecentlyPlayedSpotifySong,
-} from './lib/fetcher';
+import { getAccessToken, getCurrentSpotifySong, getRecentlyPlayedSpotifySong } from './lib/fetcher';
 import { mapCurrentSpotifySong, mapRecentSpotifySong } from './lib/parser';
 
-async function getCurrentSong(
-  accessToken: string,
-): Promise<SpotifyTrack | null> {
+async function getCurrentSong(accessToken: string): Promise<SpotifyTrack | null> {
   const res = await getCurrentSpotifySong(accessToken);
   const currentTrack = mapCurrentSpotifySong(res?.track);
   return currentTrack;
 }
 
-async function getRecentSong(
-  accessToken: string,
-): Promise<SpotifyTrack | null> {
+async function getRecentSong(accessToken: string): Promise<SpotifyTrack | null> {
   const res = await getRecentlyPlayedSpotifySong(accessToken);
   const recentTrack = mapRecentSpotifySong(res?.track);
   return recentTrack;
@@ -36,11 +28,11 @@ export async function useSpotifySong(
     console.log(tokenResponse);
   }
 
-  const accessToken = tokenResponse.accessToken;
+  const { accessToken } = tokenResponse;
 
   if (tokenResponse.status === 'success') {
     setInterval(
-      async function (accessToken) {
+      async (accessToken) => {
         const currentSong = await getCurrentSong(accessToken);
 
         if (currentSong !== null) {
@@ -58,7 +50,6 @@ export async function useSpotifySong(
     );
 
     return song;
-  } else {
-    return null;
   }
+  return null;
 }
