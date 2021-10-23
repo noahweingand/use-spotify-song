@@ -68,12 +68,12 @@ export async function getRecentlyPlayedSpotifySong(accessToken: string): Promise
     }
     return {
       status: ResponseEnum.Failed,
-      message: 'Something went wrong with getting recently played song...',
+      message: 'Failed to fetch recently played Spotify song...',
     };
   } catch (e) {
     return {
       status: ResponseEnum.Failed,
-      message: 'Something went wrong with getting recently played song...',
+      message: 'Failed to fetch recently played Spotify song...',
     };
   }
 }
@@ -97,12 +97,12 @@ export async function getCurrentSpotifySong(accessToken: string): Promise<Curren
     }
     return {
       status: ResponseEnum.Failed,
-      message: 'Something went wrong with getting current song...',
+      message: 'Failed to fetch current Spotify song...',
     };
   } catch (e) {
     return {
       status: ResponseEnum.Failed,
-      message: 'Something went wrong with getting current song...',
+      message: 'Failed to fetch current Spotify song...',
     };
   }
 }
