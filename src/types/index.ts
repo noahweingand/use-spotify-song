@@ -30,3 +30,19 @@ export type SpotifySong = {
   previewUrl: string;
   url: string;
 };
+
+export type SpotifySongError = {
+  status: string;
+  message: string;
+};
+
+export type SpotifySongInstance = {
+  song: SpotifySong | null;
+  error?: SpotifySongError;
+};
+
+export type UseSpotifySongConfig = {
+  interval?: number;
+  noInterval?: boolean;
+  recentOnly?: boolean;
+};
