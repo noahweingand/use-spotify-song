@@ -1,99 +1,74 @@
-import { SpotifyTrack, SpotifyAlbum } from '../types';
+import { SpotifySong, SpotifyArtist, SpotifyAlbum } from '../types';
+import {
+  ExternalUrl,
+  Album,
+  Artist,
+  RecentlyPlayedItem,
+  CurrentlyPlayingData,
+} from '../types/spotify-api';
 
-type SpotifyArtist = {
-  name: string;
+const getUrl = (urlObj: ExternalUrl): string => urlObj.spotify;
+
+const mapAlbum = (apiAlbum: Album): SpotifyAlbum => {
+  return {
+    albumType: apiAlbum.album_type,
+    images: apiAlbum.images,
+    name: apiAlbum.name,
+    releaseDate: apiAlbum.release_date,
+    totalTracks: apiAlbum.total_tracks,
+    url: getUrl(apiAlbum.external_urls),
+  };
 };
 
-// type Album = {
-//   images: SpotifyAlbumImage[];
-//   name: string;
-//   release_date: string;
-// };
+const mapArtists = (apiArtists: Artist[]): SpotifyArtist[] => {
+  const artists: SpotifyArtist[] = [];
 
-type ExternalUrl = {
-  spotify: string;
+  apiArtists.forEach((artist) =>
+    artists.push({
+      name: artist.name,
+      url: getUrl(artist.external_urls),
+    }),
+  );
+
+  return artists;
 };
 
-// const getAlbum = (album: Album): SpotifyAlbum => {
-//   const images: SpotifyAlbumImage[] = [];
-//   album.images.forEach((album) => {
-//     images.push({
-//       height: album.height,
-//       width: album.height,
-//       url: album.url
-//     })
-//   });
-
-//   return {
-//     images: images,
-//     name: album.name,
-//     releaseDate: album.release_date
-//   }
-// }
-
-const getArtistNames = (artists: SpotifyArtist[]): string[] => {
-  const ret: string[] = [];
-  artists.forEach((artist) => ret.push(artist.name));
-  return ret;
-};
-
-export const mapRecentSpotifySong = (items: any): SpotifyTrack => {
-  const { track, played_at }: { track: any; played_at: string } = items[0];
-  const {
-    name,
-    artists,
-    album,
-    explicit,
-    external_urls,
-    preview_url,
-  }: {
-    name: string;
-    artists: SpotifyArtist[];
-    album: SpotifyAlbum;
-    explicit: boolean;
-    external_urls: ExternalUrl;
-    preview_url: string;
-  } = track;
+export const mapRecentSpotifySong = (data: RecentlyPlayedItem): SpotifySong => {
+  const { track, played_at } = data;
+  const { artists, album, duration_ms, explicit, external_urls, name, popularity, preview_url } =
+    track;
 
   const song = {
-    title: name,
-    artists: getArtistNames(artists),
-    album,
+    artists: mapArtists(artists),
+    album: mapAlbum(album),
     explicit,
-    externalUrl: external_urls?.spotify,
-    previewUrl: preview_url,
+    duration: duration_ms,
+    isPlaying: false,
+    name,
     playedAt: played_at,
+    popularity,
+    previewUrl: preview_url,
+    url: external_urls?.spotify,
   };
 
   return song;
 };
 
-export const mapCurrentSpotifySong = (items: any): SpotifyTrack => {
-  const { track, is_playing }: { track: any; is_playing: boolean } = items[0];
-  const {
-    name,
-    artists,
-    album,
-    explicit,
-    external_urls,
-    preview_url,
-  }: {
-    name: string;
-    artists: SpotifyArtist[];
-    album: SpotifyAlbum;
-    explicit: boolean;
-    external_urls: ExternalUrl;
-    preview_url: string;
-  } = track;
+export const mapCurrentSpotifySong = (data: CurrentlyPlayingData): SpotifySong => {
+  const { item, is_playing } = data;
+  const { artists, album, duration_ms, explicit, external_urls, name, popularity, preview_url } =
+    item;
 
   const song = {
-    title: name,
-    artists: getArtistNames(artists),
-    album,
+    artists: mapArtists(artists),
+    album: mapAlbum(album),
+    duration: duration_ms,
     explicit,
-    externalUrl: external_urls?.spotify,
-    previewUrl: preview_url,
     isPlaying: is_playing,
+    name,
+    popularity,
+    previewUrl: preview_url,
+    url: external_urls.spotify,
   };
 
   return song;
