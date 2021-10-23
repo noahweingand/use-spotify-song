@@ -16,6 +16,7 @@
     "max-len": [0],
     "arrow-body-style": "off",
     "linebreak-style": [0],
+    "no-extra-boolean-cast": [0],
     // turning off camelcase rule because of Spotify's API structure
     "camelcase": "off"
   }
