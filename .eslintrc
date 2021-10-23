@@ -9,8 +9,14 @@
   "rules": {
     "pretter/prettier": 0,
     "import/prefer-default-export": [0],
-    "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
     "max-len": [0],
-    "linebreak-style": [0]
+    "arrow-body-style": "off",
+    "linebreak-style": [0],
+    // turning off camelcase rule because of Spotify's API structure
+    "camelcase": "off"
   }
 }
