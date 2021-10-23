@@ -1,5 +1,12 @@
 import fetch from 'node-fetch';
-import { ResponseEnum, TokenResponse, SpotifyTrackResponse } from '../types';
+import {
+  ResponseEnum,
+  TokenResponse,
+  RecentlyPlayed,
+  RecentlyPlayedData,
+  CurrentlyPlaying,
+  CurrentlyPlayingData,
+} from '../types/spotify-api';
 
 export async function getAccessToken(
   clientId: string,
@@ -10,12 +17,12 @@ export async function getAccessToken(
     const authReq = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       headers: {
-        Authorization: `Basic ${new Buffer(`${clientId}:${clientSecret}`).toString('base64')}`,
+        Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
         grant_type: 'refresh_token',
-        refresh_token: refreshToken!,
+        refresh_token: refreshToken,
       }),
     });
 
@@ -33,7 +40,6 @@ export async function getAccessToken(
           accessToken: '',
         };
   } catch (e) {
-    console.log(e);
     return {
       status: ResponseEnum.Failed,
       message: 'Failed to get access token from Spotify authorization',
@@ -42,9 +48,7 @@ export async function getAccessToken(
   }
 }
 
-export async function getRecentlyPlayedSpotifySong(
-  accessToken: string,
-): Promise<SpotifyTrackResponse> {
+export async function getRecentlyPlayedSpotifySong(accessToken: string): Promise<RecentlyPlayed> {
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
       headers: {
@@ -53,13 +57,13 @@ export async function getRecentlyPlayedSpotifySong(
       },
     });
 
-    const data = await res.json();
+    const data: RecentlyPlayedData = await res.json();
     if (data.items) {
-      const { items }: { items: any } = data;
+      const { items } = data;
       return {
         status: ResponseEnum.Success,
         message: 'Recent track received from Spotify API',
-        track: items,
+        data: items[0],
       };
     }
     return {
@@ -67,7 +71,6 @@ export async function getRecentlyPlayedSpotifySong(
       message: 'Something went wrong with getting recently played song...',
     };
   } catch (e) {
-    console.log(e);
     return {
       status: ResponseEnum.Failed,
       message: 'Something went wrong with getting recently played song...',
@@ -75,7 +78,7 @@ export async function getRecentlyPlayedSpotifySong(
   }
 }
 
-export async function getCurrentSpotifySong(accessToken: string): Promise<SpotifyTrackResponse> {
+export async function getCurrentSpotifySong(accessToken: string): Promise<CurrentlyPlaying> {
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing?market=US', {
       headers: {
@@ -84,13 +87,12 @@ export async function getCurrentSpotifySong(accessToken: string): Promise<Spotif
       },
     });
 
-    const data = await res.json();
-    if (data.item) {
-      const { item }: { item: any } = data;
+    const data: CurrentlyPlayingData = await res.json();
+    if (data) {
       return {
         status: ResponseEnum.Success,
         message: 'Current track received from Spotify API',
-        track: item,
+        data,
       };
     }
     return {
@@ -98,7 +100,6 @@ export async function getCurrentSpotifySong(accessToken: string): Promise<Spotif
       message: 'Something went wrong with getting current song...',
     };
   } catch (e) {
-    console.log(e);
     return {
       status: ResponseEnum.Failed,
       message: 'Something went wrong with getting current song...',
