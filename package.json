@@ -20,7 +20,8 @@
     "build": "tsdx build",
     "prepare": "tsdx build",
     "lint": "eslint --max-warnings=0 ./src --fix",
-    "pretty": "prettier --write \"./src/**/*.ts\""
+    "pretty": "prettier --write \"./src/**/*.ts\"",
+    "type-check": "tsc --noemit"
   },
   "dependencies": {
     "node-fetch": "^2.6.1",
@@ -50,7 +51,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'hello'"
+      "pre-commit": "yarn lint"
     }
   },
   "peerDependencies": {
