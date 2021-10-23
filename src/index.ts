@@ -1,16 +1,16 @@
-import { ResponseEnum, SpotifyTrack } from './types';
+import { ResponseEnum, Spotify } from './types/spotify-api';
 import { getAccessToken, getCurrentSpotifySong, getRecentlyPlayedSpotifySong } from './lib/fetcher';
 import { mapCurrentSpotifySong, mapRecentSpotifySong } from './lib/parser';
 
 async function getCurrentSong(accessToken: string): Promise<SpotifyTrack | null> {
   const res = await getCurrentSpotifySong(accessToken);
-  const currentTrack = mapCurrentSpotifySong(res?.track);
+  const currentTrack = mapCurrentSpotifySong(res?.data);
   return currentTrack;
 }
 
 async function getRecentSong(accessToken: string): Promise<SpotifyTrack | null> {
   const res = await getRecentlyPlayedSpotifySong(accessToken);
-  const recentTrack = mapRecentSpotifySong(res?.track);
+  const recentTrack = mapRecentSpotifySong(res?.data);
   return recentTrack;
 }
 
