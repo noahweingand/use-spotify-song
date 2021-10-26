@@ -37,12 +37,12 @@ export type SpotifySongError = {
 };
 
 export type SpotifySongInstance = {
-  song: SpotifySong | null;
   error?: SpotifySongError;
+  song: SpotifySong | null;
 };
 
 export type UseSpotifySongConfig = {
   interval?: number;
-  noInterval?: boolean;
+  poll?: boolean;
   recentOnly?: boolean;
 };
