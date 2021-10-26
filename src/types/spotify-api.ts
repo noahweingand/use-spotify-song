@@ -1,4 +1,5 @@
 import { SpotifyAlbumImage } from '.';
+import { ResponseEnum } from '../lib/constants';
 
 export type ExternalUrl = {
   spotify: string;
@@ -27,11 +28,6 @@ export interface SpotifyAPISong {
   name: string;
   popularity: number;
   preview_url: string;
-}
-
-export enum ResponseEnum {
-  Success = 'success',
-  Failed = 'failed',
 }
 
 export type TokenResponse = {
