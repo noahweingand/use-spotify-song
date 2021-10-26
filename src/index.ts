@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAccessToken, getCurrentSpotifySong, getRecentlyPlayedSpotifySong } from './lib/fetcher';
 import { mapCurrentSpotifySong, mapRecentSpotifySong } from './lib/parser';
-import { UseSpotifySongConfig, SpotifySongInstance } from './types';
+import { UseSpotifySongConfig, SpotifySongInstance, SpotifySong, SpotifySongError } from './types';
 import { ResponseEnum } from './types/spotify-api';
 
 async function getCurrentSong(accessToken: string): Promise<SpotifySongInstance> {
@@ -120,29 +120,43 @@ export const useSpotifySong = (
   clientId: string,
   secret: string,
   refreshToken: string,
-  config: UseSpotifySongConfig,
-): SpotifySongInstance | null => {
-  const [songData, setSongData] = useState<SpotifySongInstance | null>(null);
+  config?: UseSpotifySongConfig,
+) => {
+  // const interval = config?.interval ?? 30;
+  // const poll = config?.poll ?? false;
+  const recentOnly = config?.recentOnly ?? false;
 
-  const { interval, noInterval, recentOnly } = config;
+  const [spotifySong, setSpotifySong] = useState<SpotifySong | null>(null);
+  const [spotifyError, setSpotifyError] = useState<SpotifySongError | undefined>(undefined);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
-  const timeoutInterval = interval ?? 30;
-  const noIntervalFlag = noInterval ?? false;
-  const recentOnlyFlag = recentOnly ?? false;
+  const getSong = () => {
+    setLoaded(false);
+
+    updateSong(clientId, secret, refreshToken, recentOnly).then((data) => {
+      if (data !== null) {
+        const { song, error } = data;
+
+        if (song !== null) {
+          setSpotifySong(song);
+        }
+
+        if (error) {
+          setSpotifyError(error);
+        }
+      }
+      setLoaded(true);
+    });
+  };
 
   useEffect(() => {
-    if (noIntervalFlag) {
-      setTimeout(() => {
-        updateSong(clientId, secret, refreshToken, recentOnlyFlag).then((data) => {
-          setSongData(data);
-        });
-      }, timeoutInterval * 1000);
-    } else {
-      updateSong(clientId, secret, refreshToken, recentOnlyFlag).then((data) => {
-        setSongData(data);
-      });
-    }
-  }, [songData]);
+    getSong();
+  }, []);
 
-  return songData;
+  return {
+    song: spotifySong,
+    error: spotifyError,
+    loaded,
+    getSong,
+  };
 };
