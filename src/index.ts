@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getAccessToken, getCurrentSpotifySong, getRecentlyPlayedSpotifySong } from './lib/fetcher';
-import { mapCurrentSpotifySong, mapRecentSpotifySong } from './lib/parser';
+import {
+  getAccessToken,
+  getCurrentSpotifySong,
+  getRecentlyPlayedSpotifySong,
+} from './lib/fetchers/fetcher';
+import { mapCurrentSpotifySong, mapRecentSpotifySong } from './lib/parsers';
 import { UseSpotifySongConfig, SpotifySongInstance, SpotifySong, SpotifySongError } from './types';
-import { ResponseEnum } from './types/spotify-api';
+import { ResponseEnum } from './lib/constants';
 
 async function getCurrentSong(accessToken: string): Promise<SpotifySongInstance> {
   const { status, message, data } = await getCurrentSpotifySong(accessToken);
@@ -107,7 +111,7 @@ const updateSong = async (
  *
  * @example
  *   const ExampleComponent = () => {
- *     const song = useSpotifySong();
+ *     const song = useSpotifySong('client-id', 'secret', 'refresh-token');
  *
  *     return (
  *       <>
