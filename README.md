@@ -55,9 +55,7 @@ One may also access a callback to re-fetch an updated song on your own prerogati
 
 ```jsx
 const Component = () => {
-  const { song, error, loaded, getSong } = useSpotifySong('client-id', 'secret', 'access-token', {
-    interval: 30,
-  });
+  const { song, error, loaded, getSong } = useSpotifySong('client-id', 'secret', 'access-token');
 
   return (
     <>
