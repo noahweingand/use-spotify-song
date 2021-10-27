@@ -95,13 +95,13 @@ const updateSong = async (
  * Grab your currently playing Spotify song or the most recently played song
  *
  * @param    {string} clientId
- *           Spotify's API client ID
+ *           Spotify API client ID
  *
  * @param    {string} secret
- *           Spotify's API secret token
+ *           Spotify API secret token
  *
  * @param    {string} refreshToken
- *           Spotify's API refresh token used to reauthenticate once an API token expires
+ *           Spotify API refresh token used to reauthorize once authorization expires
  *
  * @param    {UseSpotifySongConfig} config
  *
@@ -111,13 +111,9 @@ const updateSong = async (
  *
  * @example
  *   const ExampleComponent = () => {
- *     const song = useSpotifySong('client-id', 'secret', 'refresh-token');
+ *     const { song, error, loaded} = useSpotifySong('client-id', 'secret', 'refresh-token');
  *
- *     return (
- *       <>
- *         <p>Song name: {song.name}</p>
- *       </>
- *      )
+ *     return <p>{loaded ? song?.name : 'Loading...'}</p>
  *    }
  */
 export const useSpotifySong = (
@@ -127,7 +123,7 @@ export const useSpotifySong = (
   config?: UseSpotifySongConfig,
 ) => {
   const recentOnly = config?.recentOnly ?? false;
-  const poll = config?.poll ?? undefined;
+  const interval = config?.poll ?? undefined;
 
   const [spotifySong, setSpotifySong] = useState<SpotifySong | null>(null);
   const [spotifyError, setSpotifyError] = useState<SpotifySongError | undefined>(undefined);
@@ -153,8 +149,8 @@ export const useSpotifySong = (
   };
 
   useEffect(() => {
-    if (poll) {
-      setInterval(getSong, poll * 1000);
+    if (interval) {
+      setInterval(getSong, interval * 1000);
     } else {
       getSong();
     }
