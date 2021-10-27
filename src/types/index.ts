@@ -42,7 +42,6 @@ export type SpotifySongInstance = {
 };
 
 export type UseSpotifySongConfig = {
-  interval?: number;
-  poll?: boolean;
+  poll?: number;
   recentOnly?: boolean;
 };
