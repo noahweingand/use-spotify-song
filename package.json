@@ -16,7 +16,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest ./src --coverage",
     "build": "tsdx build",
     "prepare": "tsdx build",
     "lint": "eslint --max-warnings=0 ./src --fix",
