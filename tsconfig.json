@@ -6,6 +6,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "removeComments": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -13,8 +14,7 @@
     "isolatedModules": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "jsx": "react",
-    "rootDir": "./src"
+    "jsx": "react"
   },
   "include": ["src", "types"],
   "exclude": ["node_modules"]
