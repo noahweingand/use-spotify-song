@@ -10,12 +10,12 @@ export const apiArtist: Artist[] = [
 
 export const apiArtists: Artist[] = [
   {
-    name: 'Rio Da Yung Og',
-    external_urls: { spotify: 'https://open.spotify.com/artist/6O1vRHWVGKJTnWuJmItnsx' },
+    name: 'BADBADNOTGOOD',
+    external_urls: { spotify: 'https://open.spotify.com/artist/65dGLGjkw3UbddUg2GKQoZ' },
   },
   {
-    name: 'Rmc Mike',
-    external_urls: { spotify: 'https://open.spotify.com/artist/1j9595o6FMO4iLwci19nvo' },
+    name: 'Samuel T. Herring',
+    external_urls: { spotify: 'https://open.spotify.com/artist/6K4I1MPd7m8IztUdtrF4YU' },
   },
 ];
 
@@ -28,11 +28,11 @@ export const artist: SpotifyArtist[] = [
 
 export const artists: SpotifyArtist[] = [
   {
-    name: 'Rio Da Yung Og',
-    url: 'https://open.spotify.com/artist/6O1vRHWVGKJTnWuJmItnsx',
+    name: 'BADBADNOTGOOD',
+    url: 'https://open.spotify.com/artist/65dGLGjkw3UbddUg2GKQoZ',
   },
   {
-    name: 'Rmc Mike',
-    url: 'https://open.spotify.com/artist/1j9595o6FMO4iLwci19nvo',
+    name: 'Samuel T. Herring',
+    url: 'https://open.spotify.com/artist/6K4I1MPd7m8IztUdtrF4YU',
   },
 ];
