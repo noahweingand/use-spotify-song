@@ -4,7 +4,7 @@ import {
   getCurrentSpotifySong,
   getRecentlyPlayedSpotifySong,
 } from './lib/fetchers/fetcher';
-import { mapCurrentSpotifySong, mapRecentSpotifySong } from './lib/parsers';
+import { parseCurrentSpotifySong, parseRecentSpotifySong } from './lib/parsers';
 import { UseSpotifySongConfig, SpotifySongInstance, SpotifySong, SpotifySongError } from './types';
 import { ResponseEnum } from './lib/constants';
 
@@ -12,7 +12,7 @@ async function getCurrentSong(accessToken: string): Promise<SpotifySongInstance>
   const { status, message, data } = await getCurrentSpotifySong(accessToken);
 
   if (data) {
-    const song = mapCurrentSpotifySong(data);
+    const song = parseCurrentSpotifySong(data);
 
     return { song };
   }
@@ -30,7 +30,7 @@ async function getRecentSong(accessToken: string): Promise<SpotifySongInstance> 
   const { status, message, data } = await getRecentlyPlayedSpotifySong(accessToken);
 
   if (data) {
-    const song = mapRecentSpotifySong(data);
+    const song = parseRecentSpotifySong(data);
 
     return { song };
   }

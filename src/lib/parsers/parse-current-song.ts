@@ -2,7 +2,7 @@ import { mapArtists, mapAlbum } from './helpers/index';
 import { CurrentlyPlayingData } from '../../types/spotify-api';
 import { SpotifySong } from '../../types';
 
-export const mapCurrentSpotifySong = (data: CurrentlyPlayingData): SpotifySong => {
+export const parseCurrentSpotifySong = (data: CurrentlyPlayingData): SpotifySong => {
   const { item, is_playing } = data;
   const { artists, album, duration_ms, explicit, external_urls, name, popularity, preview_url } =
     item;

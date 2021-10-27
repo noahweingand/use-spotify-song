@@ -2,7 +2,7 @@ import { mapArtists, mapAlbum } from './helpers/index';
 import { RecentlyPlayedItem } from '../../types/spotify-api';
 import { SpotifySong } from '../../types';
 
-export const mapRecentSpotifySong = (data: RecentlyPlayedItem): SpotifySong => {
+export const parseRecentSpotifySong = (data: RecentlyPlayedItem): SpotifySong => {
   const { track, played_at } = data;
   const { artists, album, duration_ms, explicit, external_urls, name, popularity, preview_url } =
     track;
@@ -17,7 +17,7 @@ export const mapRecentSpotifySong = (data: RecentlyPlayedItem): SpotifySong => {
     playedAt: played_at,
     popularity,
     previewUrl: preview_url,
-    url: external_urls?.spotify,
+    url: external_urls.spotify,
   };
 
   return song;
