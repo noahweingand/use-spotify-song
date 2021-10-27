@@ -126,9 +126,8 @@ export const useSpotifySong = (
   refreshToken: string,
   config?: UseSpotifySongConfig,
 ) => {
-  // const interval = config?.interval ?? 30;
-  // const poll = config?.poll ?? false;
   const recentOnly = config?.recentOnly ?? false;
+  const poll = config?.poll ?? undefined;
 
   const [spotifySong, setSpotifySong] = useState<SpotifySong | null>(null);
   const [spotifyError, setSpotifyError] = useState<SpotifySongError | undefined>(undefined);
@@ -154,7 +153,11 @@ export const useSpotifySong = (
   };
 
   useEffect(() => {
-    getSong();
+    if (poll) {
+      setInterval(getSong, poll * 1000);
+    } else {
+      getSong();
+    }
   }, []);
 
   return {
