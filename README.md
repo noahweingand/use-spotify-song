@@ -1,13 +1,11 @@
 # use-spotify-song
 
-// TO DO - add an image
 A React hook for to fetch the your currently playing Spotify song, or your most recently played. Polling support available!
 
 ## Features
 
-- 📦 **Tiny**: `use-spotify-song` weighs in at **less than** 700 bytes minified and gzipped.
-- 🌳 **Universal**: we dist esm and cjs modules.
-- 💪 **Strongly typed**: `use-last-fm` is written in TypeScript and encourages good practices this way.
+- 🌳 **Universal**: provides esm and cjs modules.
+- 💪 **Strongly typed**: Typescript support.
 
 ## Getting Started
 
