@@ -3,7 +3,7 @@ import {
   fetchAccessToken,
   fetchCurrentSpotifySong,
   fetchRecentlyPlayedSpotifySong,
-} from './lib/fetchers/fetcher';
+} from './lib/fetchers';
 import { parseCurrentSpotifySong, parseRecentSpotifySong } from './lib/parsers';
 import { UseSpotifySongConfig, SpotifySongInstance, SpotifySong, SpotifySongError } from './types';
 import { ResponseEnum } from './lib/constants';
