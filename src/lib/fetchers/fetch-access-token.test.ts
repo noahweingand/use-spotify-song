@@ -1,21 +1,21 @@
-import { getAccessToken } from './fetch-access-token';
-import { fetchMock } from '../../../test/utils/fetch-mock';
+import { fetchAccessToken } from './fetch-access-token';
+import { accessTokenFetchMock } from '../../../test/utils/fetch-mock';
 import { tokenResponse, errorTokenResponse } from '../../../test/mock-data/token-response';
 
-describe('fetch access token', () => {
-  test('returns a valid access token response', async () => {
-    fetchMock({ access_token: 'valid access token' });
+describe('fetch access token from Spotify Authentication API', () => {
+  test('returns successful access token response', async () => {
+    accessTokenFetchMock({ access_token: 'valid access token' });
 
-    const res = await getAccessToken('client-id', 'secret', 'refresh-token');
+    const res = await fetchAccessToken('client-id', 'secret', 'refresh-token');
 
     expect(typeof res).toBe('object');
     expect(res).toStrictEqual(tokenResponse);
   });
 
-  test('returns error token response', async () => {
-    fetchMock({});
+  test('returns failed token response', async () => {
+    accessTokenFetchMock({});
 
-    const res = await getAccessToken('client-id', 'secret', 'refresh-token');
+    const res = await fetchAccessToken('client-id', 'secret', 'refresh-token');
 
     expect(typeof res).toBe('object');
     expect(res).toStrictEqual(errorTokenResponse);
