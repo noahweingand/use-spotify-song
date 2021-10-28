@@ -1,7 +1,7 @@
 import { fetchRecentlyPlayedSpotifySong } from './fetch-recent-song';
 import { ResponseEnum } from '../constants';
 import { RecentlyPlayed } from '../../types/spotify-api';
-import { recentSongFetchMock } from '../../../test/utils/fetch-mock';
+import { songFetchMock } from '../../../test/utils/fetch-mock';
 import { recentSongApiResponse } from '../../../test/mock-data/recent-song-api';
 
 const recentlyPlayedSuccess: RecentlyPlayed = {
@@ -15,9 +15,9 @@ const recentlyPlayedFailed: RecentlyPlayed = {
   message: 'Failed to fetch recently played Spotify song...',
 };
 
-describe('fetch recent song from Spotify API', () => {
-  test('returns recently played success response', async () => {
-    recentSongFetchMock(recentSongApiResponse);
+describe('fetch last recently played song from Spotify API', () => {
+  test('returns last recently played success response', async () => {
+    songFetchMock(recentSongApiResponse);
 
     const res = await fetchRecentlyPlayedSpotifySong('access-token');
 
@@ -26,7 +26,7 @@ describe('fetch recent song from Spotify API', () => {
   });
 
   test('returns recently played failed response', async () => {
-    recentSongFetchMock({});
+    songFetchMock({});
 
     const res = await fetchRecentlyPlayedSpotifySong('access-token');
 
