@@ -11,7 +11,9 @@ export async function fetchCurrentSpotifySong(accessToken: string): Promise<Curr
     });
 
     const data: CurrentlyPlayingData = await res.json();
-    if (data) {
+    const { item, is_playing } = data;
+
+    if (item && is_playing) {
       return {
         status: ResponseEnum.Success,
         message: 'Current track received from Spotify API',
