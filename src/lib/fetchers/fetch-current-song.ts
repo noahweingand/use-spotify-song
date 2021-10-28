@@ -1,7 +1,7 @@
 import { CurrentlyPlaying, CurrentlyPlayingData } from '../../types/spotify-api';
 import { ResponseEnum } from '../constants';
 
-export async function getCurrentSpotifySong(accessToken: string): Promise<CurrentlyPlaying> {
+export async function fetchCurrentSpotifySong(accessToken: string): Promise<CurrentlyPlaying> {
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing?market=US', {
       headers: {

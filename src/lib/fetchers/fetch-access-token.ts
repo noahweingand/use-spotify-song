@@ -1,7 +1,7 @@
 import { TokenResponse } from '../../types/spotify-api';
 import { ResponseEnum } from '../constants';
 
-export async function getAccessToken(
+export async function fetchAccessToken(
   clientId: string,
   clientSecret: string,
   refreshToken: string,

@@ -1,7 +1,7 @@
 import { RecentlyPlayed, RecentlyPlayedData } from '../../types/spotify-api';
 import { ResponseEnum } from '../constants';
 
-export async function getRecentlyPlayedSpotifySong(accessToken: string): Promise<RecentlyPlayed> {
+export async function fetchRecentlyPlayedSpotifySong(accessToken: string): Promise<RecentlyPlayed> {
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
       headers: {

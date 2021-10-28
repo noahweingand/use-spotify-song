@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import {
-  getAccessToken,
-  getCurrentSpotifySong,
-  getRecentlyPlayedSpotifySong,
+  fetchAccessToken,
+  fetchCurrentSpotifySong,
+  fetchRecentlyPlayedSpotifySong,
 } from './lib/fetchers/fetcher';
 import { parseCurrentSpotifySong, parseRecentSpotifySong } from './lib/parsers';
 import { UseSpotifySongConfig, SpotifySongInstance, SpotifySong, SpotifySongError } from './types';
 import { ResponseEnum } from './lib/constants';
 
 async function getCurrentSong(accessToken: string): Promise<SpotifySongInstance> {
-  const { status, message, data } = await getCurrentSpotifySong(accessToken);
+  const { status, message, data } = await fetchCurrentSpotifySong(accessToken);
 
   if (data) {
     const song = parseCurrentSpotifySong(data);
@@ -27,7 +27,7 @@ async function getCurrentSong(accessToken: string): Promise<SpotifySongInstance>
 }
 
 async function getRecentSong(accessToken: string): Promise<SpotifySongInstance> {
-  const { status, message, data } = await getRecentlyPlayedSpotifySong(accessToken);
+  const { status, message, data } = await fetchRecentlyPlayedSpotifySong(accessToken);
 
   if (data) {
     const song = parseRecentSpotifySong(data);
@@ -50,7 +50,7 @@ const updateSong = async (
   refreshToken: string,
   recentOnlyFlag: boolean,
 ): Promise<SpotifySongInstance | null> => {
-  const tokenResponse = await getAccessToken(clientId, secret, refreshToken);
+  const tokenResponse = await fetchAccessToken(clientId, secret, refreshToken);
 
   if (tokenResponse.status === ResponseEnum.Failed) {
     return {
