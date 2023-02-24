@@ -1,7 +1,7 @@
 import { apiArtists, artists } from './artist';
 import { apiAlbum, album } from './album';
-import { CurrentlyPlayingData, SpotifyAPISong } from '../../src/types/spotify-api';
-import { SpotifySong } from '../../src/types';
+import type { CurrentlyPlaying, SpotifyAPISong } from '../../src/types/spotify-api';
+import type { SpotifySong } from '../../src/types';
 
 const apiCurrentSong: SpotifyAPISong = {
   artists: apiArtists,
@@ -15,7 +15,7 @@ const apiCurrentSong: SpotifyAPISong = {
   external_urls: { spotify: 'https://open.spotify.com/track/1I40L32fTSSkBkPeArX9Ul' },
 };
 
-export const currentlyPlayingData: CurrentlyPlayingData = {
+export const currentlyPlaying: CurrentlyPlaying = {
   item: apiCurrentSong,
   is_playing: true,
 };

@@ -1,5 +1,4 @@
 import { SpotifyAlbumImage } from '.';
-import { ResponseEnum } from '../lib/constants';
 
 export type ExternalUrl = {
   spotify: string;
@@ -30,34 +29,16 @@ export interface SpotifyAPISong {
   preview_url: string;
 }
 
-export type TokenResponse = {
-  accessToken: string;
-  status: ResponseEnum;
-  message: string;
-};
-
 export interface RecentlyPlayedItem {
   track: SpotifyAPISong;
   played_at: string;
 }
 
-export interface RecentlyPlayedData {
+export interface RecentlyPlayed {
   items: RecentlyPlayedItem[];
 }
 
-export interface RecentlyPlayed {
-  status: string;
-  message: string;
-  data?: RecentlyPlayedItem;
-}
-
-export type CurrentlyPlayingData = {
+export interface CurrentlyPlaying {
   item: SpotifyAPISong;
   is_playing: boolean;
-};
-
-export interface CurrentlyPlaying {
-  status: string;
-  message: string;
-  data?: CurrentlyPlayingData;
 }

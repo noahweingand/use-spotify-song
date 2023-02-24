@@ -1,2 +1,2 @@
-export * from './parse-current-song';
-export * from './parse-recent-song';
+export { parseCurrentSpotifySong } from './parse-current-song';
+export { parseRecentSpotifySong } from './parse-recent-song';

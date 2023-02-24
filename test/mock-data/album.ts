@@ -1,5 +1,5 @@
-import { Album } from '../../src/types/spotify-api';
-import { SpotifyAlbum } from '../../src/types/index';
+import type { Album } from '../../src/types/spotify-api';
+import type { SpotifyAlbum } from '../../src/types/index';
 
 export const apiAlbum: Album = {
   album_type: 'album',

@@ -1,13 +1,13 @@
-import { mapAlbum, mapArtists } from './index';
-import { apiAlbum, album } from '../../../../test/mock-data/album';
-import { apiArtist, artist, apiArtists, artists } from '../../../../test/mock-data/artist';
+import { mapAlbum, mapArtists } from './helpers';
+import { apiAlbum, album } from '../../../test/mock-data/album';
+import { apiArtist, artist, apiArtists, artists } from '../../../test/mock-data/artist';
 
 describe('map Spotify API Album object to custom object', () => {
   test('returns valid custom album object', () => {
     const res = mapAlbum(apiAlbum);
 
     expect(typeof res).toBe('object');
-    expect(res).toStrictEqual(album);
+    expect(JSON.stringify(res)).toStrictEqual(JSON.stringify(album));
   });
 });
 
@@ -16,13 +16,13 @@ describe('map Spotify API Artist object to custom object', () => {
     const res = mapArtists(apiArtist);
 
     expect(typeof res).toBe('object');
-    expect(res).toStrictEqual(artist);
+    expect(JSON.stringify(res)).toStrictEqual(JSON.stringify(artist));
   });
 
-  test('given multiple artists, returns valid custom artist object', () => {
+  test('map multiple Spotify API Artist objects to custom object', () => {
     const res = mapArtists(apiArtists);
 
     expect(typeof res).toBe('object');
-    expect(res).toStrictEqual(artists);
+    expect(JSON.stringify(res)).toStrictEqual(JSON.stringify(artists));
   });
 });

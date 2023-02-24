@@ -18,7 +18,7 @@ export type SpotifyArtist = {
   url: string;
 };
 
-export type SpotifySong = {
+export interface SpotifySong {
   album: SpotifyAlbum;
   artists: SpotifyArtist[];
   duration: number;
@@ -29,17 +29,7 @@ export type SpotifySong = {
   popularity: number;
   previewUrl: string;
   url: string;
-};
-
-export type SpotifySongError = {
-  status: string;
-  message: string;
-};
-
-export type SpotifySongInstance = {
-  error?: SpotifySongError;
-  song: SpotifySong | null;
-};
+}
 
 export type UseSpotifySongConfig = {
   poll?: number;
