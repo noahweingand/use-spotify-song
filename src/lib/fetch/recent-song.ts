@@ -1,4 +1,4 @@
-import type { RecentlyPlayed, RecentlyPlayedItem } from '../../types/spotify-api';
+import type { RecentlyPlayedItem } from '../../types/spotify-api';
 
 export async function fetchRecentlyPlayedSpotifySong(
   accessToken: string,
@@ -13,17 +13,17 @@ export async function fetchRecentlyPlayedSpotifySong(
       },
     });
 
-    const data: RecentlyPlayed = await res.json();
+    if (res.status === 200) {
+      const { items } = await res.json();
 
-    const { items } = data;
-
-    if (items) {
-      const [item] = items;
-      song = item;
+      if (items) {
+        const [item] = items;
+        song = item;
+      }
     }
-
-    return song;
   } catch (e) {
-    throw new Error('Failed to fetch recently played song from Spotify API');
+    Promise.reject(e);
   }
+
+  return song;
 }

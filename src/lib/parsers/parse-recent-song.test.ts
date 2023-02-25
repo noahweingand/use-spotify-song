@@ -1,5 +1,5 @@
 import { parseRecentSpotifySong } from './index';
-import { recentlyPlayedItem, recentSong } from '../../../test/mock-data/recent-song';
+import { recentlyPlayedItem, recentSong } from './mock-data/recent-song.mock';
 
 describe('parse a recent song api response and return a custom song object', () => {
   test('given a recent song response from Spotify API, return a parsed spotify object', () => {

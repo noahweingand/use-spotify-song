@@ -1,6 +1,10 @@
 import type { CurrentlyPlaying } from '../../types/spotify-api';
 
-export async function fetchCurrentSpotifySong(accessToken: string): Promise<CurrentlyPlaying> {
+export async function fetchCurrentSpotifySong(
+  accessToken: string,
+): Promise<CurrentlyPlaying | undefined> {
+  let song;
+
   try {
     const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing?market=US', {
       headers: {
@@ -9,10 +13,14 @@ export async function fetchCurrentSpotifySong(accessToken: string): Promise<Curr
       },
     });
 
-    const data: CurrentlyPlaying = await res.json();
+    if (res.status === 204) return song;
 
-    return data;
+    if (res.status === 200) {
+      song = await res.json();
+    }
   } catch (e) {
-    throw new Error('Failed to get current song from Spotify API');
+    Promise.reject(e);
   }
+
+  return song;
 }

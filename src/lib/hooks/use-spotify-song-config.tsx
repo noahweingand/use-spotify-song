@@ -1,4 +1,4 @@
 import { useContext } from 'react';
-import { SpotifySongConfig } from '../context/spotify-song-config';
+import { SpotifySongConfigContext } from '../context/spotify-song-config';
 
-export const useSpotifyConfig = () => useContext(SpotifySongConfig);
+export const useSpotifyConfig = () => useContext(SpotifySongConfigContext);

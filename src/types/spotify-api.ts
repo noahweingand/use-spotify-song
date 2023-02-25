@@ -41,4 +41,5 @@ export interface RecentlyPlayed {
 export interface CurrentlyPlaying {
   item: SpotifyAPISong;
   is_playing: boolean;
+  currently_playing_type: string;
 }

@@ -1,3 +1,5 @@
+import type { SWRConfiguration } from 'swr';
+
 export type SpotifyAlbumImage = {
   height: number;
   url: string;
@@ -23,7 +25,7 @@ export interface SpotifySong {
   artists: SpotifyArtist[];
   duration: number;
   explicit: boolean;
-  isPlaying?: boolean;
+  isPlaying: boolean;
   name: string;
   playedAt?: string;
   popularity: number;
@@ -31,7 +33,12 @@ export interface SpotifySong {
   url: string;
 }
 
-export type UseSpotifySongConfig = {
-  poll?: number;
-  recentOnly?: boolean;
+export type UseSpotifySong = {
+  song: SpotifySong | undefined;
+  isLoading: boolean;
 };
+
+export interface SpotifySongContext {
+  accessToken: string;
+  config?: SWRConfiguration;
+}

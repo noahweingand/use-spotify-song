@@ -1,6 +1,6 @@
 {
   "name": "use-spotify-song",
-  "version": "0.0.1",
+  "version": "0.1.0-alpha",
   "description": "A React hook for the currently playing or last played song from your Spotify account",
   "repository": "https://github.com/noahweingand/use-spotify-song.git",
   "author": "Noah Weingand <noahweingand@gmail.com>",

@@ -1,5 +1,5 @@
-import type { Artist } from '../../src/types/spotify-api';
-import type { SpotifyArtist } from '../../src/types';
+import type { Artist } from '../../../types/spotify-api';
+import type { SpotifyArtist } from '../../../types';
 
 export const apiArtist: Artist[] = [
   {

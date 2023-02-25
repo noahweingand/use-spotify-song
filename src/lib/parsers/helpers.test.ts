@@ -1,6 +1,6 @@
 import { mapAlbum, mapArtists } from './helpers';
-import { apiAlbum, album } from '../../../test/mock-data/album';
-import { apiArtist, artist, apiArtists, artists } from '../../../test/mock-data/artist';
+import { apiAlbum, album } from './mock-data/album.mock';
+import { apiArtist, artist, apiArtists, artists } from './mock-data/artist.mock';
 
 describe('map Spotify API Album object to custom object', () => {
   test('returns valid custom album object', () => {
