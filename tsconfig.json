@@ -17,6 +17,5 @@
     "noUnusedLocals": true,
     "jsx": "react"
   },
-  "include": ["src", "types"],
-  "exclude": ["node_modules", "test"]
+  "include": ["src", "types"]
 }
