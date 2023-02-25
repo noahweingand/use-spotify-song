@@ -2,16 +2,6 @@
   "name": "use-spotify-song",
   "version": "0.1.0-alpha",
   "description": "A React hook for the currently playing or last played song from your Spotify account",
-  "repository": "https://github.com/noahweingand/use-spotify-song.git",
-  "author": "Noah Weingand <noahweingand@gmail.com>",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "module": "dist/use-spotify-song.esm.js",
-  "files": [
-    "dist",
-    "src"
-  ],
   "keywords": [
     "react",
     "react-hook",
@@ -19,9 +9,17 @@
     "music",
     "spotify"
   ],
-  "engines": {
-    "node": ">=16"
-  },
+  "homepage": "https://github.com/noahweingand/use-spotify-song#use-spotify-song",
+  "license": "MIT",
+  "author": "Noah Weingand <noahweingand@gmail.com>",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/use-spotify-song.esm.js",
+  "typings": "dist/index.d.ts",
+  "repository": "https://github.com/noahweingand/use-spotify-song.git",
   "scripts": {
     "test": "jest ./src --coverage",
     "build": "tsdx build",
@@ -35,6 +33,9 @@
       "pre-commit": "yarn lint",
       "pre-push": "yarn test"
     }
+  },
+  "dependencies": {
+    "swr": "^2.0.4"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
@@ -64,7 +65,7 @@
     "react": ">= 16.8.x",
     "react-dom": ">= 16.8.x"
   },
-  "dependencies": {
-    "swr": "^2.0.4"
+  "engines": {
+    "node": ">=16"
   }
 }
