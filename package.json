@@ -1,6 +1,6 @@
 {
   "name": "use-spotify-song",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "A React hook for the currently playing or last played song from your Spotify account",
   "repository": "https://github.com/noahweingand/use-spotify-song.git",
   "author": "Noah Weingand <noahweingand@gmail.com>",
@@ -12,6 +12,13 @@
     "dist",
     "src"
   ],
+  "keywords": [
+    "react",
+    "react-hook",
+    "hook",
+    "music",
+    "spotify"
+  ],
   "engines": {
     "node": ">=16"
   },
@@ -22,6 +29,12 @@
     "lint": "eslint --max-warnings=0 ./src --fix",
     "pretty": "prettier --write \"./src/**/*.ts\"",
     "type-check": "tsc --noemit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn test"
+    }
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
@@ -51,17 +64,7 @@
     "react": ">= 16.8.x",
     "react-dom": ">= 16.8.x"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint",
-      "pre-push": "yarn test"
-    }
-  },
-  "keywords": [
-    "react",
-    "react-hook",
-    "hook",
-    "music",
-    "spotify"
-  ]
+  "dependencies": {
+    "swr": "^2.0.4"
+  }
 }
