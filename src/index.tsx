@@ -34,7 +34,9 @@ const fetcher = async (
 export const useSpotifySong = (): UseSpotifySong => {
   const { accessToken, config } = useSpotifyConfig();
 
-  const { data, isLoading } = useSWR('spotify', () => fetcher(accessToken), { ...config });
+  const { data, isLoading, mutate, isValidating } = useSWR('spotify', () => fetcher(accessToken), {
+    ...config,
+  });
 
   let song;
 
@@ -49,6 +51,8 @@ export const useSpotifySong = (): UseSpotifySong => {
   return {
     song,
     isLoading,
+    update: mutate,
+    isUpdating: isValidating,
   };
 };
 

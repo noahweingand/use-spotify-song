@@ -1,4 +1,5 @@
-import type { SWRConfiguration } from 'swr';
+import type { KeyedMutator, SWRConfiguration } from 'swr';
+import type { CurrentlyPlaying, RecentlyPlayedItem } from './spotify-api';
 
 export type SpotifyAlbumImage = {
   height: number;
@@ -36,6 +37,8 @@ export interface SpotifySong {
 export type UseSpotifySong = {
   song: SpotifySong | undefined;
   isLoading: boolean;
+  update: KeyedMutator<CurrentlyPlaying | RecentlyPlayedItem | undefined>;
+  isUpdating: boolean;
 };
 
 export interface SpotifySongContext {
