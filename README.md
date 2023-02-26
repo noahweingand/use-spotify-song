@@ -2,6 +2,8 @@
 
 A React hook to fetch your currently playing or your most recently played Spotify song.
 
+TEST
+
 ## Features
 
 - 🌎 **Universal**: provides esm and cjs modules.
