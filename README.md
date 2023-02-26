@@ -12,7 +12,7 @@ A React hook to fetch your currently playing or your most recently played Spotif
 
 > `yarn add use-spotify-song`
 
-You'll need to register an application with [Spotify for Developers](https://developer.spotify.com/) to use this hook. You'll also need an access token from Spotify's OAuth. Instructions to get that are [here](https://developer.spotify.com/documentation/general/guides/authorization/).
+You'll need to register an application with [Spotify for Developers](https://developer.spotify.com/) to use this hook. You'll also need an access token from [Spotify's OAuth](https://developer.spotify.com/documentation/general/guides/authorization/).
 
 `use-spotify-song` uses [SWR](https://swr.vercel.app/), a react hook for data fetching, under the hood. Most of SWR's data-fetching capabilitities available through the package are exposed through this hook as well.
 
@@ -58,19 +58,19 @@ Support for Suspense, offered by React 18, is available. Turn it on in the confi
 const Parent = () => {
   return (
     <Suspense fallback={<p>Loading...</p>}>
-      <Component />
+      <Child />
     </Suspense>
   );
 };
 
-const Component = () => {
+const Child = () => {
   const { song } = useSpotifySong();
 
   return <p>{song?.name}</p>;
 };
 ```
 
-One may also access a callback to revalidate the song. as well as a state for if the song is validating.
+One may also access a callback to revalidate the song on their own prerogative, as well as a state for if the song is validating.
 
 ```jsx
 const Component = () => {
