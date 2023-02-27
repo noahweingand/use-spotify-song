@@ -1,7 +1,7 @@
 {
   "name": "use-spotify-song",
-  "version": "0.1.0-alpha",
-  "description": "A React hook for the currently playing or last played song from your Spotify account",
+  "version": "1.0.0",
+  "description": "A React hook for the current or most recently played song from Spotify",
   "keywords": [
     "react",
     "react-hook",

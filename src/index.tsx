@@ -19,17 +19,13 @@ const fetcher = async (
   });
 
 /**
- * Grab a currently playing Spotify song or the most recently played song
+ * Grab the current or most recently played Spotify song
  *
  * @return   {UseSpotifySong}
- *           A Spotify song
+ *           An object of Spotify song data, loading state, and a mutator and its respective validation state
  *
  * @example
- *   const Example = () => {
- *     const { song, isLoading } = useSpotifySong();
- *
- *     return <p>{isLoading ? 'Loading...' : song?.name}</p>
- *    }
+ * const { song, isLoading, update, isUpdating } = useSpotifySong();
  */
 export const useSpotifySong = (): UseSpotifySong => {
   const { accessToken, config } = useSpotifyConfig();
